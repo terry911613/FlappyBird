@@ -11,6 +11,8 @@ class GameplayScene: SKScene {
     
     var bird = Bird()
     var pipesHolder = SKNode()
+    var scoreLabel = SKLabelNode(fontNamed: "04b_19")
+    var score = 0
     
     override func didMove(to view: SKView) {
         setup()
@@ -30,6 +32,7 @@ class GameplayScene: SKScene {
         createBG()
         createGrounds()
         spawnObstacles()
+        createLabel()
     }
     
     func createBird() {
@@ -102,6 +105,17 @@ class GameplayScene: SKScene {
         pipesHolder = SKNode()
         pipesHolder.name = "Holder"
         
+        let scoreNode = SKSpriteNode()
+        scoreNode.color = .red
+        scoreNode.name = "Score"
+        scoreNode.position = .zero
+        scoreNode.size = CGSize(width: 5, height: 300)
+        scoreNode.physicsBody = SKPhysicsBody(rectangleOf: scoreNode.size)
+        scoreNode.physicsBody?.categoryBitMask = ColliderType.Score
+        scoreNode.physicsBody?.collisionBitMask = 0
+        scoreNode.physicsBody?.affectedByGravity = false
+        scoreNode.physicsBody?.isDynamic = false
+        
         let upPipe = setupPipe(imageNamed: "Pipe 1", y: 630, zRotation: CGFloat.pi)
         let downPipe = setupPipe(imageNamed: "Pipe 1", y: -630)
         pipesHolder.zPosition = 5
@@ -109,6 +123,8 @@ class GameplayScene: SKScene {
                                        y: .random(in: -300...300))
         pipesHolder.addChild(upPipe)
         pipesHolder.addChild(downPipe)
+        pipesHolder.addChild(scoreNode)
+        
         addChild(pipesHolder)
         
         let destination = (frame.width / 2) + upPipe.frame.width
@@ -143,5 +159,18 @@ class GameplayScene: SKScene {
         let delay = SKAction.wait(forDuration: 2)
         let sequence = SKAction.sequence([spawn, delay])
         run(SKAction.repeatForever(sequence), withKey: "Spawn")
+    }
+    
+    func createLabel() {
+        scoreLabel.zPosition = 6
+        scoreLabel.position = CGPoint(x: 0, y: 450)
+        scoreLabel.fontSize = 120
+        scoreLabel.text = String(score)
+        addChild(scoreLabel)
+    }
+    
+    func incrementScore() {
+        score += 1
+        scoreLabel.text = String(score)
     }
 }
