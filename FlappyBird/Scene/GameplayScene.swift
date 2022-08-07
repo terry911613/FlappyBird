@@ -13,18 +13,32 @@ class GameplayScene: SKScene {
     var pipesHolder = SKNode()
     var scoreLabel = SKLabelNode(fontNamed: "04b_19")
     var score = 0
+    var gameStarted = false
+    var isAlive = false
     
     override func didMove(to view: SKView) {
         setup()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        bird.flap()
+        
+        if gameStarted == false {
+            isAlive = true
+            gameStarted = true
+            bird.physicsBody?.affectedByGravity = true
+            spawnObstacles()
+        }
+        
+        if isAlive {
+            bird.flap()
+        }
     }
     
     override func update(_ currentTime: TimeInterval) {
-        moveBG()
-        moveGround()
+        if isAlive {
+            moveBG()
+            moveGround()
+        }
     }
     
     func setup() {
@@ -32,7 +46,6 @@ class GameplayScene: SKScene {
         createBird()
         createBG()
         createGrounds()
-        spawnObstacles()
         createLabel()
     }
     
@@ -177,6 +190,37 @@ class GameplayScene: SKScene {
         self.score = score
         scoreLabel.text = String(score)
     }
+    
+    func birdDied() {
+        
+        removeAction(forKey: "Spawn")
+        
+        for child in children {
+            if child.name == "Holder" {
+                child.removeAction(forKey: "Move")
+            }
+        }
+        
+        isAlive = false
+        
+        let scaleUp = SKAction.scale(to: 1, duration: 0.5)
+        
+        let retry = SKSpriteNode(imageNamed: "Retry")
+        retry.name = "Retry"
+        retry.position = CGPoint(x: -150, y: -150)
+        retry.zPosition = 7
+        retry.setScale(0)
+        retry.run(scaleUp)
+        addChild(retry)
+        
+        let quit = SKSpriteNode(imageNamed: "Quit")
+        quit.name = "Quit"
+        quit.position = CGPoint(x: 150, y: -150)
+        quit.zPosition = 7
+        quit.setScale(0)
+        quit.run(scaleUp)
+        addChild(quit)
+    }
 }
 
 extension GameplayScene: SKPhysicsContactDelegate {
@@ -200,9 +244,13 @@ extension GameplayScene: SKPhysicsContactDelegate {
                     setScore(number)
                 }
             } else if secondNodeName.contains("Pipe") {
-                print("didBegin Collided with Pipe")
+                if isAlive {
+                    birdDied()
+                }
             } else if secondNodeName.contains("Ground") {
-                print("didBegin Collided with Ground")
+                if isAlive {
+                    birdDied()
+                }
             }
         }
     }

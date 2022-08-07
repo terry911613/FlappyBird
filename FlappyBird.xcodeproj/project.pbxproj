@@ -90,7 +90,7 @@
 				443CE5CB289983960013F00D /* Assets.xcassets */,
 				443CE5CD289983960013F00D /* LaunchScreen.storyboard */,
 				4412B844289D7DC8001FE1A8 /* ColliderType.swift */,
-				44CB3163289C13DB005B3FC2 /* Class */,
+				44CB3163289C13DB005B3FC2 /* Bird */,
 				44CB3162289C13C9005B3FC2 /* Scene */,
 				4412B846289D8B77001FE1A8 /* Extension */,
 				44CB3157289C1101005B3FC2 /* Resource */,
@@ -134,12 +134,12 @@
 			path = Scene;
 			sourceTree = "<group>";
 		};
-		44CB3163289C13DB005B3FC2 /* Class */ = {
+		44CB3163289C13DB005B3FC2 /* Bird */ = {
 			isa = PBXGroup;
 			children = (
 				4493D772289D760800258A85 /* Bird.swift */,
 			);
-			path = Class;
+			path = Bird;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

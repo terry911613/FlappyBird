@@ -21,7 +21,7 @@ class Bird: SKSpriteNode {
             physicsBody = SKPhysicsBody(circleOfRadius: size.height / 2)
         }
         physicsBody?.allowsRotation = false
-        physicsBody?.affectedByGravity = true
+        physicsBody?.affectedByGravity = false
         physicsBody?.categoryBitMask = ColliderType.Bird
         // use | to set collisionBitMask (= ColliderType.Ground) and (= ColliderType.Ground)
         physicsBody?.collisionBitMask = ColliderType.Ground | ColliderType.Pipes
@@ -31,6 +31,6 @@ class Bird: SKSpriteNode {
     func flap() {
         // set velocity to CGVector(dx: 0, dy: 0) let bird do not affect by fall velocity
         physicsBody?.velocity = CGVector(dx: 0, dy: 0)
-        physicsBody?.applyImpulse(CGVector(dx: 0, dy: 180))
+        physicsBody?.applyImpulse(CGVector(dx: 0, dy: 125))
     }
 }
