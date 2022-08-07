@@ -28,6 +28,7 @@ class GameplayScene: SKScene {
     }
     
     func setup() {
+        physicsWorld.contactDelegate = self
         createBird()
         createBG()
         createGrounds()
@@ -101,13 +102,16 @@ class GameplayScene: SKScene {
         }
     }
     
+    var recordScore = 0
+    
     func createPipes() {
         pipesHolder = SKNode()
         pipesHolder.name = "Holder"
         
         let scoreNode = SKSpriteNode()
         scoreNode.color = .red
-        scoreNode.name = "Score"
+        recordScore += 1
+        scoreNode.name = "Score:\(recordScore)"
         scoreNode.position = .zero
         scoreNode.size = CGSize(width: 5, height: 300)
         scoreNode.physicsBody = SKPhysicsBody(rectangleOf: scoreNode.size)
@@ -169,8 +173,37 @@ class GameplayScene: SKScene {
         addChild(scoreLabel)
     }
     
-    func incrementScore() {
-        score += 1
+    func setScore(_ score: Int) {
+        self.score = score
         scoreLabel.text = String(score)
+    }
+}
+
+extension GameplayScene: SKPhysicsContactDelegate {
+    func didBegin(_ contact: SKPhysicsContact) {
+        var firstBody = SKPhysicsBody()
+        var secondBody = SKPhysicsBody()
+        
+        if contact.bodyA.node?.name == "Bird" {
+            firstBody = contact.bodyA
+            secondBody = contact.bodyB
+        } else {
+            firstBody = contact.bodyB
+            secondBody = contact.bodyA
+        }
+        
+        if firstBody.node?.name == "Bird" {
+            guard let secondNodeName = secondBody.node?.name else { return }
+            if secondNodeName.contains("Score") {
+                if let numberStr = secondNodeName.split(separator: ":").first(where: { $0 != "Score" }),
+                   let number = Int(numberStr) {
+                    setScore(number)
+                }
+            } else if secondNodeName.contains("Pipe") {
+                print("didBegin Collided with Pipe")
+            } else if secondNodeName.contains("Ground") {
+                print("didBegin Collided with Ground")
+            }
+        }
     }
 }

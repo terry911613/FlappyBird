@@ -14,6 +14,7 @@ class Bird: SKSpriteNode {
         zPosition = 3
         // Default anchorPoint is CGPoint(x: 0.5, y: 0.5)
 //        anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        // use texture will fire multiple times didBegin(_ contact: SKPhysicsContact)
         if let texture = texture {
             physicsBody = SKPhysicsBody(texture: texture, size: size)
         } else {
