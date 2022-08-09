@@ -31,6 +31,6 @@ class Bird: SKSpriteNode {
     func flap() {
         // set velocity to CGVector(dx: 0, dy: 0) let bird do not affect by fall velocity
         physicsBody?.velocity = CGVector(dx: 0, dy: 0)
-        physicsBody?.applyImpulse(CGVector(dx: 0, dy: 125))
+        physicsBody?.applyImpulse(CGVector(dx: 0, dy: 135))
     }
 }

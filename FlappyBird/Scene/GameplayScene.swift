@@ -16,6 +16,8 @@ class GameplayScene: SKScene {
     var gameStarted = false
     var isAlive = false
     
+    var press = SKSpriteNode()
+    
     override func didMove(to view: SKView) {
         setup()
     }
@@ -25,12 +27,25 @@ class GameplayScene: SKScene {
         if gameStarted == false {
             isAlive = true
             gameStarted = true
+            press.removeFromParent()
             bird.physicsBody?.affectedByGravity = true
             spawnObstacles()
         }
         
         if isAlive {
             bird.flap()
+        }
+        
+        for touch in touches {
+            let location = touch.location(in: self)
+            if atPoint(location).name == "Retry" {
+                removeAllActions()
+                removeAllChildren()
+                setup()
+            }
+            if atPoint(location).name == "Quit" {
+                
+            }
         }
     }
     
@@ -42,11 +57,26 @@ class GameplayScene: SKScene {
     }
     
     func setup() {
+        
+        gameStarted = false
+        isAlive = false
+        setScore(0)
+        
         physicsWorld.contactDelegate = self
+        
+        createInstructions()
         createBird()
         createBG()
         createGrounds()
         createLabel()
+    }
+    
+    func createInstructions() {
+        press = SKSpriteNode(imageNamed: "Press")
+        press.position = CGPoint(x: 0, y: 0)
+//        press.setScale(1.8)
+        press.zPosition = 10
+        addChild(press)
     }
     
     func createBird() {
@@ -115,16 +145,13 @@ class GameplayScene: SKScene {
         }
     }
     
-    var recordScore = 0
-    
     func createPipes() {
         pipesHolder = SKNode()
         pipesHolder.name = "Holder"
         
         let scoreNode = SKSpriteNode()
         scoreNode.color = .red
-        recordScore += 1
-        scoreNode.name = "Score:\(recordScore)"
+        scoreNode.name = "Score"
         scoreNode.position = .zero
         scoreNode.size = CGSize(width: 5, height: 300)
         scoreNode.physicsBody = SKPhysicsBody(rectangleOf: scoreNode.size)
@@ -237,17 +264,14 @@ extension GameplayScene: SKPhysicsContactDelegate {
         }
         
         if firstBody.node?.name == "Bird" {
-            guard let secondNodeName = secondBody.node?.name else { return }
-            if secondNodeName.contains("Score") {
-                if let numberStr = secondNodeName.split(separator: ":").first(where: { $0 != "Score" }),
-                   let number = Int(numberStr) {
-                    setScore(number)
-                }
-            } else if secondNodeName.contains("Pipe") {
+            if secondBody.node?.name == "Score" {
+                setScore(score + 1)
+                secondBody.node?.removeFromParent()
+            } else if secondBody.node?.name == "Pipe" {
                 if isAlive {
                     birdDied()
                 }
-            } else if secondNodeName.contains("Ground") {
+            } else if secondBody.node?.name == "Ground" {
                 if isAlive {
                     birdDied()
                 }
