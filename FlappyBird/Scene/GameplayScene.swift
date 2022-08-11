@@ -44,7 +44,10 @@ class GameplayScene: SKScene {
                 setup()
             }
             if atPoint(location).name == "Quit" {
-                
+                if let mainMenu = MainMenuScene(fileNamed: "MainMenuScene") {
+                    mainMenu.scaleMode = .aspectFill
+                    view?.presentScene(mainMenu, transition: SKTransition.doorway(withDuration: 1))
+                }
             }
         }
     }

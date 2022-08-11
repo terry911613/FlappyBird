@@ -16,6 +16,8 @@
 		443CE5CC289983960013F00D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 443CE5CB289983960013F00D /* Assets.xcassets */; };
 		443CE5CF289983960013F00D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 443CE5CD289983960013F00D /* LaunchScreen.storyboard */; };
 		4493D773289D760800258A85 /* Bird.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4493D772289D760800258A85 /* Bird.swift */; };
+		449F44E428A5636A00838A52 /* MainMenuScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 449F44E328A5636A00838A52 /* MainMenuScene.sks */; };
+		449F44E628A5639300838A52 /* MainMenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449F44E528A5639300838A52 /* MainMenuScene.swift */; };
 		44CB315B289C111E005B3FC2 /* Dead.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 44CB3158289C111E005B3FC2 /* Dead.mp3 */; };
 		44CB315C289C111E005B3FC2 /* Score.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 44CB3159289C111E005B3FC2 /* Score.mp3 */; };
 		44CB315D289C111E005B3FC2 /* Fly.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 44CB315A289C111E005B3FC2 /* Fly.mp3 */; };
@@ -36,6 +38,8 @@
 		443CE5CE289983960013F00D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4493D772289D760800258A85 /* Bird.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bird.swift; sourceTree = "<group>"; };
 		44953958289F91C000B14246 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		449F44E328A5636A00838A52 /* MainMenuScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MainMenuScene.sks; sourceTree = "<group>"; };
+		449F44E528A5639300838A52 /* MainMenuScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuScene.swift; sourceTree = "<group>"; };
 		44CB3158289C111E005B3FC2 /* Dead.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Dead.mp3; sourceTree = "<group>"; };
 		44CB3159289C111E005B3FC2 /* Score.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Score.mp3; sourceTree = "<group>"; };
 		44CB315A289C111E005B3FC2 /* Fly.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Fly.mp3; sourceTree = "<group>"; };
@@ -128,8 +132,10 @@
 		44CB3162289C13C9005B3FC2 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
-				44CB3166289C14BA005B3FC2 /* GameplayScene.swift */,
 				44CB3164289C13F1005B3FC2 /* GameplayScene.sks */,
+				44CB3166289C14BA005B3FC2 /* GameplayScene.swift */,
+				449F44E328A5636A00838A52 /* MainMenuScene.sks */,
+				449F44E528A5639300838A52 /* MainMenuScene.swift */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -204,6 +210,7 @@
 				44CB3161289C1268005B3FC2 /* 04b_19.ttf in Resources */,
 				44CB315D289C111E005B3FC2 /* Fly.mp3 in Resources */,
 				44CB315B289C111E005B3FC2 /* Dead.mp3 in Resources */,
+				449F44E428A5636A00838A52 /* MainMenuScene.sks in Resources */,
 				443CE5CA289983950013F00D /* Main.storyboard in Resources */,
 				443CE5CC289983960013F00D /* Assets.xcassets in Resources */,
 				443CE5CF289983960013F00D /* LaunchScreen.storyboard in Resources */,
@@ -224,6 +231,7 @@
 				4412B848289D8B93001FE1A8 /* CGFloat+Extension.swift in Sources */,
 				443CE5C7289983950013F00D /* GameViewController.swift in Sources */,
 				4493D773289D760800258A85 /* Bird.swift in Sources */,
+				449F44E628A5639300838A52 /* MainMenuScene.swift in Sources */,
 				443CE5BF289983950013F00D /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
