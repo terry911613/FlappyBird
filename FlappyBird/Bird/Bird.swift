@@ -9,7 +9,17 @@ import SpriteKit
 
 class Bird: SKSpriteNode {
     
+    var birdAnimation = [SKTexture]()
+    var birdAnimationAction = SKAction()
+    
     func setup() {
+        
+        for i in 2...3 {
+            let name = "\(GameManager.shared.getBird().rawValue) \(i)"
+            birdAnimation.append(SKTexture(imageNamed: name))
+        }
+        birdAnimationAction = SKAction.animate(with: birdAnimation, timePerFrame: 0.08, resize: true, restore: true)
+        
         name = "Bird"
         zPosition = 3
         // Default anchorPoint is CGPoint(x: 0.5, y: 0.5)
@@ -32,5 +42,6 @@ class Bird: SKSpriteNode {
         // set velocity to CGVector(dx: 0, dy: 0) let bird do not affect by fall velocity
         physicsBody?.velocity = CGVector(dx: 0, dy: 0)
         physicsBody?.applyImpulse(CGVector(dx: 0, dy: 135))
+        run(birdAnimationAction)
     }
 }

@@ -9,6 +9,8 @@ import SpriteKit
 
 class MainMenuScene: SKScene {
     
+    var birdButton = SKSpriteNode()
+    
     override func didMove(to view: SKView) {
         setup()
     }
@@ -23,6 +25,10 @@ class MainMenuScene: SKScene {
                 }
             } else if atPoint(location).name == "Highscore" {
                 
+            } else if atPoint(location).name == "Bird" {
+                GameManager.shared.toggleBird()
+                birdButton.removeFromParent()
+                setupBird()
             }
         }
     }
@@ -30,6 +36,7 @@ class MainMenuScene: SKScene {
     func setup() {
         setupBackground()
         setupButtons()
+        setupBird()
     }
     
     func setupBackground() {
@@ -54,5 +61,24 @@ class MainMenuScene: SKScene {
         
         addChild(play)
         addChild(highscore)
+    }
+    
+    func setupBird() {
+        birdButton = SKSpriteNode(imageNamed: "Blue 1")
+        birdButton.name = "Bird"
+        birdButton.position = CGPoint(x: 0, y: 200)
+        birdButton.setScale(1.3)
+        birdButton.zPosition = 3
+        
+        var birdSKTextures = [SKTexture]()
+        for i in 1...3 {
+            let name = "\(GameManager.shared.getBird().rawValue) \(i)"
+            birdSKTextures.append(SKTexture(imageNamed: name))
+        }
+        
+        let animateBird = SKAction.animate(with: birdSKTextures, timePerFrame: 0.1, resize: true, restore: true)
+        birdButton.run(SKAction.repeatForever(animateBird))
+        
+        addChild(birdButton)
     }
 }

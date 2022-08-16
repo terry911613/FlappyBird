@@ -83,7 +83,7 @@ class GameplayScene: SKScene {
     }
     
     func createBird() {
-        bird = Bird(imageNamed: "Blue 1")
+        bird = Bird(imageNamed: "\(GameManager.shared.getBird().rawValue) 1")
         bird.setup()
         bird.position = CGPoint(x: -50, y: 0)
         addChild(bird)
