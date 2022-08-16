@@ -11,6 +11,7 @@ class Bird: SKSpriteNode {
     
     var birdAnimation = [SKTexture]()
     var birdAnimationAction = SKAction()
+    var diedTexture = SKTexture()
     
     func setup() {
         
@@ -19,6 +20,8 @@ class Bird: SKSpriteNode {
             birdAnimation.append(SKTexture(imageNamed: name))
         }
         birdAnimationAction = SKAction.animate(with: birdAnimation, timePerFrame: 0.08, resize: true, restore: true)
+        
+        diedTexture = SKTexture(imageNamed: "\(GameManager.shared.getBird().rawValue) 4")
         
         name = "Bird"
         zPosition = 3

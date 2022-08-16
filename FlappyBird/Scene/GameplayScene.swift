@@ -233,6 +233,8 @@ class GameplayScene: SKScene {
         
         isAlive = false
         
+        bird.texture = bird.diedTexture
+        
         let scaleUp = SKAction.scale(to: 1, duration: 0.5)
         
         let retry = SKSpriteNode(imageNamed: "Retry")
