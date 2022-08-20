@@ -234,6 +234,10 @@ class GameplayScene: SKScene {
         isAlive = false
         
         bird.texture = bird.diedTexture
+        let highScore = GameManager.shared.getHighScore()
+        if highScore < score {
+            GameManager.shared.setHighScore(score)
+        }
         
         let scaleUp = SKAction.scale(to: 1, duration: 0.5)
         

@@ -27,4 +27,12 @@ class GameManager {
             bird = birds[newIndex]
         }
     }
+    
+    func setHighScore(_ score: Int) {
+        GameDataManager.shared.score = score
+    }
+    
+    func getHighScore() -> Int {
+        GameDataManager.shared.score
+    }
 }

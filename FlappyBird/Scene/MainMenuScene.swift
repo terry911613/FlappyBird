@@ -10,6 +10,7 @@ import SpriteKit
 class MainMenuScene: SKScene {
     
     var birdButton = SKSpriteNode()
+    var scoreLabel = SKLabelNode()
     
     override func didMove(to view: SKView) {
         setup()
@@ -24,7 +25,8 @@ class MainMenuScene: SKScene {
                     view?.presentScene(gameplay, transition: SKTransition.doorway(withDuration: 1))
                 }
             } else if atPoint(location).name == "Highscore" {
-                
+                scoreLabel.removeFromParent()
+                setupScoreLabel()
             } else if atPoint(location).name == "Bird" {
                 GameManager.shared.toggleBird()
                 birdButton.removeFromParent()
@@ -80,5 +82,14 @@ class MainMenuScene: SKScene {
         birdButton.run(SKAction.repeatForever(animateBird))
         
         addChild(birdButton)
+    }
+    
+    func setupScoreLabel() {
+        scoreLabel = SKLabelNode(fontNamed: "04b_19")
+        scoreLabel.fontSize = 120
+        scoreLabel.position = CGPoint(x: 0, y: -400)
+        scoreLabel.zPosition = 10
+        scoreLabel.text = "\(GameManager.shared.getHighScore())"
+        addChild(scoreLabel)
     }
 }
